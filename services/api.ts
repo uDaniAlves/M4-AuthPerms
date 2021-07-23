@@ -21,7 +21,7 @@ export function setupAPIClient(ctx = undefined) {
       return response
     },
     (error: AxiosError) => {
-      if (error.response.status == 401) {
+      if (error.response.status === 401) {
         if (error.response.data?.code === 'token.expired') {
           //renovar o token
           cookies = parseCookies(ctx)
@@ -60,7 +60,7 @@ export function setupAPIClient(ctx = undefined) {
                 failedRequestsQueue = []
               })
               .catch((err) => {
-                failedRequestsQueue.forEach((request) => request.onFailure())
+                failedRequestsQueue.forEach((request) => request.onFailure(err))
                 failedRequestsQueue = []
 
                 if (process.browser) {
