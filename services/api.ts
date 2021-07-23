@@ -28,10 +28,8 @@ export function setupAPIClient(ctx = undefined) {
           const { 'nextauth.refreshToken': refreshToken } = cookies
 
           const originalConfig = error.config
-
           if (!isRefreshing) {
             isRefreshing = true
-
             api
               .post('/refresh', {
                 refreshToken,
@@ -53,7 +51,6 @@ export function setupAPIClient(ctx = undefined) {
                   }
                 )
                 api.defaults.headers['Authorization'] = `Bearer ${token}`
-
                 failedRequestsQueue.forEach((request) =>
                   request.onSuccess(token)
                 )
@@ -71,7 +68,6 @@ export function setupAPIClient(ctx = undefined) {
                 isRefreshing = false
               })
           }
-
           return new Promise((resolve, reject) => {
             failedRequestsQueue.push({
               onSuccess: (token: string) => {
