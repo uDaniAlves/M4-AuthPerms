@@ -82,6 +82,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       //sessionStorage
       //localStorage
       //cookies
+
       setCookie(undefined, 'nextauth.token', token, {
         maxAge: 60 * 60 * 24 * 30, // 30 dias
         path: '/',
